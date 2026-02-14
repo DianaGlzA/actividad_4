@@ -1,8 +1,17 @@
+const path = require('path');
 require('dotenv').config(); 
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db')
 const app = express(); 
+
+// Archivos estáticos
+app.use(express.static(path.join(__dirname, '../public')));
+
+// Ruta principal muestra el login
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/login.html'));
+});
 
 connectDB();
  
