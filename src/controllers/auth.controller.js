@@ -40,7 +40,7 @@ class AuthController {
     });
 } catch (error) {
     res.status(500).json({
-        message: 'Error al registrar al usuario',
+        message: 'Error al registrar usuario',
         error: error.message
     });
 }
@@ -60,7 +60,7 @@ class AuthController {
             const validPassword = await bcrypt.compare(password, user.password);
             if (!validPassword) {
                 return res.status(400).json({
-                    message: 'contraseña incorrecta'
+                    message: 'Contraseña incorrecta'
                 });
             }
 
