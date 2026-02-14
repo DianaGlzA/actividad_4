@@ -4,7 +4,7 @@ const laptopSchema = new mongoose.Schema({
     modelo: { type: String, required: true},
     precio: { type: Number, required: true},
     ram: { type: Number, required: true},
-    alemacenamiento: { type: Number, required: true},
+    almacenamiento: { type: Number, required: true},
     procesador: { type: String, required: true},
     disponibilidad: { type: Boolean, default: true}
 }, { timestamps: true });

@@ -23,6 +23,12 @@ describe('Auth Controller', () => {
        );
        app = createTestApp({}); 
     });
+    
+    beforeEach(async () => {
+        // Limpiar usuarios antes de cada test
+        await User.deleteMany({});
+    });
+    
     afterAll(async () => {
         await mongoose.connection.close();
     });
