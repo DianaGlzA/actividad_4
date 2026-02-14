@@ -2,18 +2,17 @@ const express = require('express');
 const Laptop = require('../models/laptop');
 const verifyToken = require('../middleware/auth.middleware');
 const checkRole = require('../middleware/role.middleware');
-
+const laptopsController = require('../controllers/laptops.controller'); 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    const laptops = await Laptop.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(laptops);
-}); 
+// Rutas públicas
+router.get('/', laptopsController.getAll);
+router.get('/:id', laptopsController.getById);
 
-router.delete('/:id', verifyToken, checkRole(['admin']), async (req, res) => {
-    await Laptop.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Laptop eliminada' });
-});
+// Rutas protegidas (solo admin)
+router.post('/', verifyToken, checkRole(['admin']), laptopsController.create);
+router.put('/:id', verifyToken, checkRole(['admin']), laptopsController.update);
+router.delete('/:id', verifyToken, checkRole(['admin']), laptopsController.delete);
 
 module.exports = router;
 
